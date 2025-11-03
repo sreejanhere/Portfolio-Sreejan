@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Robo Car</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#0a192f;
+      --secondary:#112240;
+      --accent:#64ffda;
+      --accent-light:#8affdf;
+      --text-primary:#e6f1ff;
+      --text-secondary:#8892b0;
+      --transition:all 0.25s cubic-bezier(0.645,0.045,0.355,1);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;background:var(--primary);color:var(--text-primary);line-height:1.6}
+    .container{width:90%;max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* Header */
+    header{background:var(--secondary);position:fixed;top:0;left:0;width:100%;z-index:1000;padding:18px 0}
+    .navbar{display:flex;align-items:center;justify-content:space-between}
+    .logo{color:var(--accent);font-weight:700;font-size:1.6rem;text-decoration:none}
+    .btn{display:inline-block;padding:10px 18px;border-radius:6px;color:var(--accent);border:1px solid var(--accent);background:transparent;text-decoration:none;transition:var(--transition)}
+    .btn:hover{background:rgba(100,255,218,0.08);transform:translateY(-2px)}
+
+    /* Page */
+    .project-detail{padding:140px 0 60px}
+    .project-header{text-align:center;margin-bottom:28px}
+    .project-header h1{font-size:2.4rem;color:var(--accent);margin-bottom:8px}
+    .status{color:var(--text-secondary);margin-bottom:6px}
+
+    /* Gallery */
+    .main-image{border-radius:40px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.35);margin-bottom:18px}
+    .main-image img{width:100%;display:block}
+    .image-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
+    .image-grid img,
+    .image-grid video{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+      border-radius:8px;
+      cursor:pointer;
+      border:2px solid rgba(100,255,218,0.03);
+      transition:var(--transition);
+    }
+    .image-grid img:hover,
+    .image-grid video:hover{
+      transform:scale(1.03);
+      box-shadow:0 10px 30px rgba(0,255,170,0.04);
+    }
+
+    /* Content */
+    .project-content h2{color:var(--accent);margin:18px 0;font-size:1.5rem}
+    .card{background:var(--secondary);padding:18px;border-radius:10px;margin-bottom:16px;box-shadow:0 10px 30px rgba(0,0,0,0.25)}
+    .project-details{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:12px}
+    .project-details ul{margin-left:18px;color:var(--text-secondary)}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:12px}
+    .feature-item{padding:14px;background:rgba(100,255,218,0.03);border-radius:8px;text-align:center;border:1px solid rgba(100,255,218,0.05)}
+    .feature-icon{font-size:1.6rem;margin-bottom:8px}
+
+    .code-snippet{background:rgba(0,0,0,0.06);padding:12px;border-radius:8px;font-family:'Roboto Mono',monospace;color:var(--text-primary);overflow:auto}
+
+    .project-links{text-align:center;margin-top:22px}
+    .btn-primary{background:var(--accent);color:var(--primary);padding:12px 18px;border-radius:8px;text-decoration:none;display:inline-block;margin-right:12px}
+    .btn-primary:hover{background:var(--accent-light)}
+
+    footer{background:var(--secondary);padding:24px 0;text-align:center;margin-top:36px;color:var(--text-secondary)}
+
+    @media(max-width:900px){.project-details{grid-template-columns:1fr}.project-header h1{font-size:1.8rem}}
+
+    /* ✅ Popup Lightbox */
+    .media-popup{
+      display:none;
+      position:fixed;
+      top:0;left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.85);
+      justify-content:center;
+      align-items:center;
+      z-index:5000;
+    }
+    .media-popup img,
+    .media-popup video{
+      max-width:88%;
+      max-height:88%;
+      border:3px solid var(--accent);
+      border-radius:10px;
+    }
+    .close-btn{
+      position:absolute;
+      top:20px;
+      right:35px;
+      font-size:45px;
+      cursor:pointer;
+      color:white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">PROJECTS</a>
+        <div>
+          <a href="index.html#projects" class="btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="project-detail">
+    <div class="container">
+      <div class="project-header">
+        <h1>Bluetooth Controlled Robo Car</h1>
+        <p class="status">Status: Completed ✅</p>
+        <p class="muted" style="color:var(--text-secondary)">AT89S52 microcontroller • HC-05 Bluetooth • L298N motor driver • 2-wheel differential drive with caster • PWM speed control</p>
+      </div>
+
+      <!-- ✅ Updated Gallery -->
+      <section class="image-grid">
+        <video src="Assest/robocar.mp4"></video>
+        <img src="Assest/Robo_car.jpg" alt="Robo Car">
+        <img src="Assest/ROBO_component.jpg" alt="Components">
+      </section>
+
+      <!-- ✅ Popup Modal -->
+      <div id="mediaPopup" class="media-popup">
+        <span class="close-btn">&times;</span>
+        <video id="popupVideo" controls></video>
+        <img id="popupImg">
+      </div>
+
+      <!-- Content -->
+      <section class="project-content" aria-labelledby="overview">
+        <div id="overview" class="card">
+          <h2>Project Overview</h2>
+          <p>
+            This Robo Car is a compact, Bluetooth-controlled robot built around the <strong>AT89S52 (8052)</strong> microcontroller.
+            Control commands are sent from a custom Android app <strong>Serial Bluetooth Terminal</strong> to the HC-05 Bluetooth module connected to the 8051 UART.
+            The received commands are parsed by the firmware and mapped to motor control functions (forward, backward, left, right, stop).
+          </p>
+          <p>
+            The vehicle uses a 2-wheel differential drive (two DC geared motors) and a caster wheel for balance. Motor driving is handled by an
+            <strong>L298N</strong> H-bridge and the microcontroller generates PWM to control motor speed smoothly. Power comes from a
+            <strong>12V battery pack (4 × 18650 cells)</strong> with a 7805 regulator for logic supply,or directly from motor driver.
+          </p>
+        </div>
+
+        <div class="project-details">
+          <div class="card">
+            <h3>Technical Specifications</h3>
+            <ul>
+              <li>Microcontroller: AT89S52 (8051 family)</li>
+              <li>Communication: HC-05 Bluetooth (UART, 9600 baud)</li>
+              <li>Motor Driver: L298N dual H-bridge</li>
+              <li>Drive: 2 × DC geared motors + 1 caster wheel</li>
+              <li>Speed Control: PWM generated by 8051 firmware</li>
+              <li>Power: 12V 18650 battery pack; 5V regulated logic via 7805</li>
+              <li>Development: Embedded C (Keil uVision)</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Components Used</h3>
+            <ul>
+              <li>AT89S52 Microcontroller</li>
+              <li>HC-05 Bluetooth Module</li>
+              <li>L298N Motor Driver Module</li>
+              <li>2 × DC Geared Motors (paired)</li>
+              <li>3 × 18650 Li-ion cells (12V pack)</li>
+              <li>7805 Voltage Regulator, capacitors, connectors</li>
+              <li>Breadboard / protoboard, chassis and wheels</li>
+              <li>Android app - Serial Bluetooth Terminal</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Control Features</h3>
+          <div class="feature-grid">
+            <div class="feature-item"><span class="feature-icon">⬆️</span><strong>Forward</strong><p style="color:var(--text-secondary)">Both motors rotate forward</p></div>
+            <div class="feature-item"><span class="feature-icon">🔄</span><strong>Rotate</strong><p style="color:var(--text-secondary)">The car rotates Clockwise </p></div>
+            <div class="feature-item"><span class="feature-icon">↩️</span><strong>Turn Left</strong><p style="color:var(--text-secondary)">Right motor forward, left slower/stopped</p></div>
+            <div class="feature-item"><span class="feature-icon">↪️</span><strong>Turn Right</strong><p style="color:var(--text-secondary)">Left motor forward, right slower/stopped</p></div>
+            <div class="feature-item"><span class="feature-icon">⏹️</span><strong>Stop</strong><p style="color:var(--text-secondary)">All motors off</p></div>
+            <div class="feature-item"><span class="feature-icon">⚡</span><strong>PWM Speed</strong><p style="color:var(--text-secondary)">Smooth acceleration (via code)</p></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Learning Outcomes</h3>
+          <ul>
+            <li>Practical UART-based Bluetooth control using HC-05</li>
+            <li>DC motor control via L298N and PWM speed regulation</li>
+            <li>Firmware development for AT89C52 using Keil</li>
+            <li>Power distribution and safe battery usage for robotics</li>
+            <li>Designing a simple mobile UI (MIT App Inventor) for hardware control</li>
+            <br> You can check out my self written article on HC05 interfacing with 8051 microcontroller <a href="Assest/Article on 8051 Goes Wireless.pdf">Here</a>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Challenges & Solutions</h3>
+          <p><strong>Motor jerk / abrupt start:</strong> fixed using PWM ramp-up for smoother acceleration.</p>
+          <p><strong>Voltage dips under load:</strong> separated motor & logic supply, added decoupling caps and a 7805 regulator for MCU.</p>
+          <p><strong>Bluetooth command mismatches:</strong> used fixed single-character ASCII commands and added simple input validation in firmware.</p>
+        </div>
+
+        <div class="card">
+          <h3>Future Enhancements</h3>
+          <ul>
+            <li>Ultrasonic obstacle avoidance</li>
+            <li>Line-following using IR sensors</li>
+            <li>Battery monitoring and low-voltage cut-off</li>
+            <li>Improved chassis and motor mounting</li>
+          </ul>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+
+  <!-- ✅ Lightbox Script -->
+  <script>
+    const popup = document.getElementById("mediaPopup");
+    const popupImg = document.getElementById("popupImg");
+    const popupVideo = document.getElementById("popupVideo");
+    const closeBtn = document.querySelector(".close-btn");
+
+    document.querySelectorAll(".image-grid img, .image-grid video").forEach(media=>{
+      media.addEventListener("click",()=>{
+        const src = media.getAttribute("src");
+
+        if(src.endsWith(".mp4")){
+          popupImg.style.display="none";
+          popupVideo.style.display="block";
+          popupVideo.src=src;
+        } else {
+          popupVideo.style.display="none";
+          popupImg.style.display="block";
+          popupImg.src=src;
+        }
+        popup.style.display="flex";
+      });
+    });
+
+    closeBtn.onclick=()=>{
+      popup.style.display="none";
+      popupVideo.pause();
+    };
+
+    popup.onclick=(e)=>{
+      if(e.target===popup){
+        popup.style.display="none";
+        popupVideo.pause();
+      }
+    };
+  </script>
+
+</body>
+</html>

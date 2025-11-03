@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIT App Inventor - LED & Robo Car Control </title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #0a192f;
+    --secondary: #112240;
+    --accent: #64ffda;
+    --accent-light: #8affdf;
+    --text-primary: #e6f1ff;
+    --text-secondary: #8892b0;
+    --card-bg: rgba(17, 34, 64, 0.85);
+    --transition: all 0.3s ease;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Poppins',sans-serif;
+    background:var(--primary);
+    color:var(--text-primary);
+}
+.container{width:90%;max-width:1200px;margin:auto;}
+header{
+    background:var(--secondary);
+    padding:20px 0;
+    position:fixed;width:100%;top:0;z-index:1000;
+}
+.navbar{display:flex;justify-content:space-between;align-items:center;}
+.logo{font-size:1.8rem;font-weight:700;color:var(--accent);text-decoration:none;}
+.btn{
+    padding:10px 20px;color:var(--accent);
+    border:1px solid var(--accent);border-radius:4px;
+    text-decoration:none;transition:var(--transition);
+}
+.btn:hover{
+    background:rgba(100,255,218,0.1);
+    box-shadow:0 0 10px var(--accent);
+}
+.project-detail{padding:150px 0 60px;}
+
+.card{
+    background:var(--card-bg);
+    padding:25px;
+    border-radius:12px;
+    margin:25px 0;
+    border:1px solid rgba(100,255,218,0.15);
+    transition:var(--transition);
+}
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 18px rgba(100,255,218,0.25);
+}
+
+h1,h2,h3{
+    color:var(--accent);
+    margin-bottom:10px;
+}
+.icon-heading i{
+    margin-right:10px;
+    color:var(--accent-light);
+}
+
+.image-grid{
+    margin-top:15px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+.image-grid img, .main-image img{
+    border-radius:10px;width:100%;
+    box-shadow:0 0 12px rgba(0,0,0,0.35);
+    transition:var(--transition);
+    cursor:pointer;
+}
+.image-grid img:hover{
+    transform:scale(1.05);
+    filter:brightness(1.15);
+}
+
+ul li{color:var(--text-secondary);margin:8px 0;}
+
+footer{margin-top:60px;padding:25px 0;text-align:center;background:var(--secondary);}
+footer p{color:var(--text-secondary);font-size:0.9rem;}
+
+@media(max-width:768px){
+    .project-detail{padding-top:120px;}
+}
+
+/* ✅ Popup Viewer */
+.media-popup {
+    display: none;
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.85);
+    justify-content:center;
+    align-items:center;
+    z-index:5000;
+}
+.media-popup img {
+    max-width:88%;
+    max-height:88%;
+    border-radius:10px;
+    border:3px solid var(--accent);
+}
+.close-btn {
+    position:absolute;
+    top:20px;
+    right:35px;
+    font-size:45px;
+    cursor:pointer;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <a href="index.html" class="logo">PROJECTS</a>
+            <a href="index.html#projects" class="btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+        </nav>
+    </div>
+</header>
+
+<section class="project-detail">
+<div class="container">
+
+    <div class="project-header" style="text-align:center;margin-bottom:30px;">
+        <h1><i class="fa-solid fa-mobile-screen-button"></i> MIT App Inventor</h1>
+        <p class="project-date">🔋 Status: Ongoing </p>
+    </div>
+
+    <div class="main-image card">
+        <img src="Assest/images.png" alt="App UI">
+    </div>
+
+    <div class="card">
+        <h2 class="icon-heading"><i class="fa-solid fa-images"></i> App Screenshots</h2>
+        <div class="image-grid">
+            <img src="Assest/mit1.png">
+            <img src="Assest/mit2.png">
+            <img src="Assest/mit3.png">
+            <img src="Assest/ledblock.png">
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="icon-heading"><i class="fa-solid fa-microchip"></i> Skills Learned 🧠</h2>
+        <ul>
+            <li>App Designing</li>
+            <li>Logic Building</li>
+            <li>Basic operation of blocks and connectors</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2 class="icon-heading"><i class="fa-solid fa-bolt"></i> Difficulties Faced 👾</h2>
+        <ul>
+            <li>Error in Logic Building</li>
+            <li>Connectors mismatch issue</li>
+            <li>Designing in self wanted pixels is tough</li>
+        </ul>
+    </div>
+
+</div>
+</section>
+
+<!-- ✅ Popup Modal -->
+<div id="mediaPopup" class="media-popup">
+    <span class="close-btn">&times;</span>
+    <img id="popupImg">
+</div>
+
+<script>
+const popup = document.getElementById("mediaPopup");
+const popupImg = document.getElementById("popupImg");
+const closeBtn = document.querySelector(".close-btn");
+
+document.querySelectorAll(".image-grid img, .main-image img").forEach(img => {
+    img.addEventListener("click", () => {
+        popupImg.src = img.getAttribute("src");
+        popup.style.display = "flex";
+    });
+});
+
+closeBtn.onclick = () => popup.style.display = "none";
+popup.onclick = e => { if(e.target === popup) popup.style.display = "none"; };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual ±5V Power Supply </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #112240;
+            --accent: #64ffda;
+            --accent-light: #8affdf;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --white: #ffffff;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--secondary);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        .project-detail {
+            padding: 150px 0 50px;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .project-date {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .project-gallery {
+            margin-bottom: 50px;
+        }
+
+        .main-image {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        .project-content h2 {
+            color: var(--accent);
+            margin: 30px 0 15px;
+            font-size: 1.8rem;
+        }
+
+        .project-content h3 {
+            color: var(--accent-light);
+            margin: 25px 0 10px;
+            font-size: 1.4rem;
+        }
+
+        .project-content p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        .project-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .project-content li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .project-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .technical-specs, .components-used {
+            background-color: var(--secondary);
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .learning-outcomes, .project-challenges {
+            background-color: var(--secondary);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .project-links {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--primary);
+            margin-right: 15px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-light);
+        }
+
+        @media (max-width: 768px) {
+            .project-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">PROJECTS</a>
+                <a href="index.html" class="btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-header">
+                <h1>Dual ±5V Power Supply</h1>
+                <p class="project-date">Status: Completed✅</p>
+            </div>
+            
+            <div class="project-gallery">
+                <div class="main-image">
+                    <img src="Assest/5v.png" alt="Dual Power Supply Circuit">
+                </div>
+ <!--<div class="image-grid">
+                    <img src="https://via.placeholder.com/200x150/112240/64ffda?text=PCB+Design" alt="PCB Design">
+                    <img src="https://via.placeholder.com/200x150/112240/64ffda?text=Components" alt="Components">
+                    <img src="https://via.placeholder.com/200x150/112240/64ffda?text=Testing+Setup" alt="Testing Setup">
+                    <img src="https://via.placeholder.com/200x150/112240/64ffda?text=Final+Product" alt="Final Product">
+                </div>
+            </div>-->               
+            
+            <div class="project-content">
+                <div class="project-overview">
+                    <h2>Project Overview</h2>
+                    <p>
+                        A simple regulated dual power supply built using 7805 and 7905 voltage regulators. 
+                        This power supply is designed to provide +5V and −5V DC rails for Op-Amp circuits and other analog electronics.
+                    </p>
+                    <p>
+                        This was my first hands-on power electronics project where I practiced rectification, filtering, voltage regulation and veroboard soldering.
+                        I successfully tested the output voltages using a multimeter.
+                    </p>
+                </div>
+                
+                <div class="project-details">
+                    <div class="technical-specs">
+                        <h3>Technical Specifications</h3>
+                        <ul>
+                            <li>Transformer Input: 12V-0-12V AC</li>
+                            <li>Outputs: +5V DC and −5V DC</li>
+                            <li>Regulators: 7805 & 7905</li>
+                            <li>Rectification: Bridge Diode</li>
+                            <li>Board: Veroboard (Hand Soldered)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="components-used">
+                        <h3>Components Used</h3>
+                        <ul>
+                            <li>7805 Voltage Regulator</li>
+                            <li>7905 Voltage Regulator</li>
+                            <li>4 × 1N4007 Diodes</li>
+                            <li>1000µF Filter Capacitor</li>
+                            <li>470µF Output Capacitors</li>
+                            <li>100nF Bypass Capacitors</li>
+                            <li>12-0-12V Transformer</li>
+                            <li>LED Indicators</li>
+                            <li>Veroboard, Soldering Materials</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="learning-outcomes">
+                    <h3>Learning Outcomes</h3>
+                    <ul>
+                        <li>Worked with AC to DC conversion</li>
+                        <li>Understanding voltage regulators and filtering</li>
+                        <li>Multimeter testing for proper voltage output</li>
+                        <li>Soldering and PCB layout basics</li>
+                    </ul>
+                </div>
+                
+                <div class="project-challenges">
+                    <h3>Challenges & Fixes</h3>
+                    <p><strong>Issue:</strong> Negative voltage rail was unstable initially</p>
+                    <p><strong>Fix:</strong> Corrected diode orientation + placed bypass capacitors closer</p>
+
+                    <p><strong>Issue:</strong> Layout mistakes while soldering</p>
+                    <p><strong>Fix:</strong> Rearranged wiring for cleaner connection</p>
+                </div>
+
+                <div class="project-applications">
+                    <h3>Applications</h3>
+                    <p>Useful for powering:</p>
+                    <ul>
+                        <li>Operational Amplifier Circuits</li>
+                        <li>Analog Test Benches</li>
+                        <li>Signal Processing Experiments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

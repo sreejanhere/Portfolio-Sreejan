@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STM-32 Traffic Light</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #112240;
+            --accent: #64ffda;
+            --accent-light: #8affdf;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-primary);
+        }
+
+        header {
+            background: var(--secondary);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            color: var(--accent); font-size: 1.8rem; font-weight: 700;
+            text-decoration: none;
+        }
+
+        .btn {
+            padding: 10px 20px; border-radius: 5px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        .btn:hover { background: rgba(100,255,218,0.1); }
+
+        .project-detail { padding: 140px 0 50px; }
+
+        h1 { font-size: 2.6rem; color: var(--accent); margin-bottom: 10px; text-align: center; }
+        .project-date { text-align: center; color: var(--text-secondary); margin-bottom: 40px; }
+
+        .main-image img {
+            width: 100%; border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+            gap: 15px; margin-top: 20px;
+        }
+        .image-grid video {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.image-grid video:hover {
+    transform: scale(1.06);
+}
+
+
+        .image-grid img {
+            width: 100%; border-radius: 8px; height: 160px;
+            object-fit: cover; cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .image-grid img:hover { transform: scale(1.06); }
+
+        h2, h3 { color: var(--accent-light); margin: 25px 0 10px; }
+
+        p, li { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+
+        ul { margin-left: 20px; }
+
+        .box {
+            background: var(--secondary);
+            padding: 20px; border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .project-links { text-align: center; margin-top: 40px; }
+
+        .btn-primary {
+            background: var(--accent); color: var(--primary);
+            margin-right: 15px;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light); color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            background: var(--secondary);
+            padding: 25px 0;
+            margin-top: 50px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width:768px) { h1 { font-size: 2rem; } }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <a href="index.html" class="logo">PROJECTS</a>
+            <a href="index.html#projects" class="btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+        </nav>
+    </div>
+</header>
+
+<section class="project-detail">
+    <div class="container">
+
+        <h1>Traffic Light Controller (STM32)</h1>
+        <p class="project-date">Status: Completed✅</p>
+
+        <div class="main-image">
+            <img src="Assest/stm.png"
+                 alt="STM32 Traffic Light Project">
+        </div>
+
+        <div class="image-grid">
+            <video src="Assest/armvideo.mp4"></video>
+            <img src="Assest/traffstm.jpg" alt="Breadboard wiring example">
+            <img src="Assest/cubemx.png" alt="CubeMX configuration example">
+        </div>
+
+        <h2>Project Overview</h2>
+        <p>
+            This project implements a basic <b>traffic light control sequence</b> using the
+            <b>STM32 Nucleo-F401RE</b> microcontroller. Three LEDs (Red, Yellow, Green)
+            are controlled using <b>GPIO pins</b> and <b>timer-based delays</b> to simulate
+            real-world traffic signal timing.
+        </p>
+
+        <div class="box">
+            <h3>Features</h3>
+            <ul>
+                <li>Red → Yellow → Green automatic switching</li>
+                <li>Accurate time delays using HAL libraries</li>
+                <li>Hands-on GPIO control experience</li>
+                <li>Simple and beginner-friendly real-time project</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>Components Used</h3>
+            <ul>
+                <li>STM32 Nucleo-F401RE Board</li>
+                <li>3 LEDs (Red, Yellow, Green)</li>
+                <li>3 × 220Ω resistors</li>
+                <li>Breadboard and jumper wires</li>
+                <li>USB cable for power + programming</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>Learning Outcomes</h3>
+            <ul>
+                <li>STM32CubeMX for pin initialization</li>
+                <li>HAL-based GPIO programming in C</li>
+                <li>Understanding delays and timing control</li>
+                <li>Basic embedded hardware interfacing</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- Modal for Images & Videos -->
+<div id="mediaModal" class="modal">
+  <span class="close">&times;</span>
+  <img id="modalImg" class="modal-content">
+  <video id="modalVideo" class="modal-content" controls></video>
+</div>
+
+<style>
+.modal {
+  display:none;
+  position:fixed;
+  z-index:2000;
+  left:0; top:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.85);
+}
+.modal-content {
+  display:block;
+  margin:auto;
+  max-width:90%;
+  max-height:90vh;
+}
+.close {
+  position:absolute;
+  top:20px; right:30px;
+  font-size:35px;
+  font-weight:bold;
+  color:#fff;
+  cursor:pointer;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("mediaModal");
+    const modalImg = document.getElementById("modalImg");
+    const modalVideo = document.getElementById("modalVideo");
+    const closeBtn = document.querySelector(".close");
+
+    document.querySelectorAll(".image-grid img, .image-grid video").forEach(item => {
+        item.addEventListener("click", function () {
+            modal.style.display = "block";
+
+            if (this.tagName === "VIDEO") {
+                modalVideo.src = this.src;
+                modalVideo.style.display = "block";
+                modalVideo.play();
+                modalImg.style.display = "none";
+            } else {
+                modalImg.src = this.src;
+                modalImg.style.display = "block";
+                modalVideo.style.display = "none";
+                modalVideo.pause();
+            }
+        });
+    });
+
+    closeBtn.onclick = () => {
+        modal.style.display = "none";
+        modalVideo.pause();
+    };
+    modal.onclick = (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+            modalVideo.pause();
+        }
+    };
+});
+</script>
+
+</body>
+</html>

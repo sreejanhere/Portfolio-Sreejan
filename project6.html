@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLED Display Interface </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #112240;
+            --accent: #64ffda;
+            --accent-light: #8affdf;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --white: #ffffff;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--secondary);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        .project-detail {
+            padding: 150px 0 50px;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .project-date {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .project-gallery {
+            margin-bottom: 50px;
+        }
+
+        .main-image {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        .project-content h2 {
+            color: var(--accent);
+            margin: 30px 0 15px;
+            font-size: 1.8rem;
+        }
+
+        .project-content h3 {
+            color: var(--accent-light);
+            margin: 25px 0 10px;
+            font-size: 1.4rem;
+        }
+
+        .project-content p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        .project-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .project-content li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .project-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .technical-specs, .components-used {
+            background-color: var(--secondary);
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .learning-outcomes, .project-challenges {
+            background-color: var(--secondary);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .project-links {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--primary);
+            margin-right: 15px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-light);
+        }
+
+        footer {
+            background-color: var(--secondary);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-content p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .project-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .display-features {
+            background-color: var(--secondary);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(100, 255, 218, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .code-snippet {
+            background-color: var(--secondary);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Roboto Mono', monospace;
+            overflow-x: auto;
+        }
+
+        .i2c-protocol {
+            background-color: var(--secondary);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .protocol-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .protocol-step {
+            padding: 15px;
+            background: rgba(100, 255, 218, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .step-number {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">PROJECTS</a>
+                <a href="index.html#projects" class="btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-header">
+                <h1>OLED Display Interface</h1>
+                <p class="project-date">Status: Completed ✅</p>
+            </div>
+            
+            <div class="project-gallery">
+                <div class="main-image">
+                    <img src="Assest/arduinooled.jpg" alt="OLED Display Setup">
+                </div>
+                <!--<div class="image-grid">
+                    <img src="https://via.placeholder.com/200x150/112240/64ffda?text=I2C+Wiring" alt="I2C Wiring">
+                    <img src="https://via.placeholder.com/200x150/112240/64ffda?text=Custom+Graphics" alt="Custom Graphics">
+                    <img src="https://via.placeholder.com/200x150/112240/64ffda?text=Text+Display" alt="Text Display">
+                    <img src="https://via.placeholder.com/200x150/112240/64ffda?text=Arduino+Connection" alt="Arduino Connection">
+                </div>-->
+            </div>
+            
+            <div class="project-content">
+                <div class="project-overview">
+                    <h2>Project Overview</h2>
+                    <p>Implemented an OLED display interface using SH1106 controller with Arduino, focusing on I2C communication protocol and display buffer management. This project enabled displaying custom text, graphics, and real-time data on a high-contrast OLED screen.</p>
+                    <p>The interface supports various display modes including scrolling text, custom animations, sensor data visualization, and menu systems for embedded applications.</p>
+                </div>
+                
+                <div class="project-details">
+                    <div class="technical-specs">
+                        <h3>Technical Specifications</h3>
+                        <ul>
+                            <li>Display: SH1106 OLED (128x64 pixels)</li>
+                            <li>Interface: I2C (Two-wire serial)</li>
+                            <li>Controller: Arduino Uno/Nano</li>
+                            <li>Communication: I2C at 400kHz</li>
+                            <li>Library: Adafruit_SSD1306 & Adafruit_GFX</li>
+                            <li>Power: 3.3V or 5V operation</li>
+                            <li>Resolution: 128x64 monochrome</li>
+                            <li>Address: 0x3C (default I2C address)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="components-used">
+                        <h3>Components Used</h3>
+                        <ul>
+                            <li>SH1106 OLED Display Module</li>
+                            <li>Arduino Uno/Nano</li>
+                            <li>I2C Pull-up Resistors (4.7kΩ)</li>
+                            <li>Breadboard and Jumper Wires</li>
+                            <li>USB Cable for programming</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="i2c-protocol">
+                    <h3>I2C Communication Protocol</h3>
+                    <p>The SH1106 OLED display uses I2C protocol for communication:</p>
+                    <div class="protocol-steps">
+                        <div class="protocol-step">
+                            <div class="step-number">Step 1: Start Condition</div>
+                            <p>Master initiates communication with start bit</p>
+                        </div>
+                        <div class="protocol-step">
+                            <div class="step-number">Step 2: Address Frame</div>
+                            <p>Send device address (0x3C) with write bit</p>
+                        </div>
+                        <div class="protocol-step">
+                            <div class="step-number">Step 3: Control Byte</div>
+                            <p>Send command/data selection byte</p>
+                        </div>
+                        <div class="protocol-step">
+                            <div class="step-number">Step 4: Data Transfer</div>
+                            <p>Send display data or commands</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="display-features">
+                    <h3>Display Features Implemented (yet)</h3>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">📝</span>
+                            <strong>Text Display</strong>
+                            <p>Multiple fonts and sizes</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🖼️</span>
+                            <strong>Graphics</strong>
+                            <p>Custom shapes and icons</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="learning-outcomes">
+                    <h3>Learning Outcomes</h3>
+                    <ul>
+                        <li>I2C communication protocol implementation</li>
+                        <li>OLED display technology and working principles</li>
+                        <li>Display buffer management techniques</li>
+                        <li>Graphics programming for embedded systems</li>
+                        <li>Arduino library integration and usage</li>
+                    </ul>
+                </div>
+                
+                <div class="project-challenges">
+                    <h3>Challenges & Solutions</h3>
+                    <p><strong>Challenge:</strong> Display initialization failures</p>
+                    <p><strong>Solution:</strong> Proper I2C address configuration and pull-up resistors</p>
+                    
+                    <p><strong>Challenge:</strong> Memory constraints with graphics</p>
+                    <p><strong>Solution:</strong> Optimized buffer usage and selective display updates</p>
+                    
+                    <p><strong>Challenge:</strong> Flickering during updates</p>
+                    <p><strong>Solution:</strong> Implemented double buffering techniques</p>
+                </div>
+                <div class="card">
+          <h3>Quick Firmware Example (concept)</h3>
+          <p style="color:var(--text-secondary)">Verified and Compiled Arduino IDE Code </p>
+          <div class="code-snippet">
+<pre>
+#include <Wire.h>
+#include <U8g2lib.h>
+
+// Correct for 128x64 SH1106 OLED
+U8G2_SH1106_128X64_NONAME_F_HW_I2C display(U8G2_R0, U8X8_PIN_NONE);
+
+void setup() {
+  display.begin();
+}
+
+void loop() {
+  display.clearBuffer();
+
+  // Big spooky font
+  display.setFont(u8g2_font_ncenB12_tr);
+
+  // Center text manually
+  display.drawStr(22, 26, "HAPPY");
+  display.drawStr(2, 56, "HALLOWEEN");
+// displays HAPPY HALLOWEEN in two consecutive lines 
+  display.sendBuffer();
+  delay(100);
+}
+</pre>
+          </div>
+        </div>
+
+
+                <div class="applications">
+                    <h3>Practical Applications</h3>
+                    <ul>
+                        <li>Sensor data display for IoT devices</li>
+                        <li>Menu systems for embedded projects</li>
+                        <li>Status indicators for robotic systems</li>
+                        <li>Real-time monitoring displays</li>
+                        <li>Battery level indicators</li>
+                        <li>Network status displays</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+</body>
+</html>
